@@ -12,257 +12,396 @@
             margin: 0;
             padding: 0 20px;
         }
-        .header-bg, .cta-section {
-            margin: 0 -20px;
-            width: calc(100% + 40px);
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-        .card {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-        }
-        .card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .logo {
-            max-width: 50px;
-            height: auto;
-            margin: 4px 0;
-        }
-        .rounded-full {
-            border-radius: 50%;
-        }
-        .team-img-wrapper {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto;
-            padding: 2px;
-            background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-        }
-        .team-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        .header-bg {
-            background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            height: auto;
-            padding: 10px 0;
-        }
-        .header-logo {
-            position: relative;
-            display: block;
-            margin: 0 auto;
-        }
-        .cta-section {
-            background: url('banner.webp') no-repeat center center;
-            background-size: cover;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 50px 50px;
-            width: 100vw;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-        .cta-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1200px;
-            color: #ffffff;
-            margin: 8px 0;
-        }
-        .cta-text {
-            text-align: left;
-            max-width: 50%;
-        }
-        .cta-button {
-            background-color: #28a745;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px auto;
-            width: fit-content;
-            font-weight: bold;
-            text-transform: uppercase;
-            justify-content: center;
-        }
-        .cta-button img {
-            width: 24px;
-            height: 24px;
-            transition: fill 0.3s;
-        }
-        .cta-button:hover,
-        .cta-button:focus {
-            background-color: #1e7e34;
-            color: #ffffff;
-        }
-        .cta-button:hover img,
-        .cta-button:focus img {
-            fill: #ffffff;
-        }
-        .cta-image img {
-            max-width: 100%;
-            height: auto;
-        }
-        .services-card {
-            background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-align: center;
-        }
-        .services-card img {
-            width: 90px; /* Cambiado a 60px */
-            height: 90px; /* Cambiado a 60px */
-            margin-right: auto;
-        }
-        .section-title {
-            font-size: 43px;
-        }
-        footer {
-            background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-            padding: 20px 0;
-            text-align: center;
-            color: #ffffff;
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-        footer img {
-            width: 150px;
-            height: 150px;
-            vertical-align: middle;
-        }
-        footer p {
-            margin: 10px 0;
-        }
-        @media (max-width: 768px) {
-            .cta-content {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-            }
-            .cta-text {
-                margin-bottom: 20px;
-                max-width: 100%;
-                text-align: center;
-            }
-            .cta-image img {
-                max-width: 100%;
-            }
-            .cta-section {
-                min-height: auto;
-                height: auto;
-            }
-            .cta-button {
-                margin-right: auto;
-            }
-        }
-        /* Estilos generales */
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0; /* Asegúrate de que no haya margen */
-            padding: 0; /* Asegúrate de que no haya padding */
-        }
+        .header-bg, .cta-section { 
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
 
-        /* Media query para dispositivos móviles */
-        @media (max-width: 460px) {
-            .social-buttons {
-                margin-top: -10px; /* Ajusta este valor según sea necesario para eliminar la separación */
-            }
-            .bg-color3 {
-                margin-top: 0; /* Reduce el margen superior */
-            }
-            .py-12 {
-                padding-top: 0px; /* Reduce el padding superior */
-            }
-            .corner-images {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none; /* Para que las imágenes no interfieran con la interacción de la imagen principal */
-            }
-        }
-        
-        .bg-color3 {
-            margin-top: 0; /* Reduce el margen superior */
-        }
-        .py-12 {
-            padding-top: 20px; /* Reduce el padding superior */
-        }
-        .corner-images {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Para que las imágenes no interfieran con la interacción de la imagen principal */
-        }
-        .corner-image {
-            position: absolute;
-            width: 150px; /* Ajusta el tamaño según sea necesario */
-            height: 150px; /* Ajusta el tamaño según sea necesario */
-        }
+.card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
 
-        /* Media query para dispositivos móviles */
-        @media (max-width: 768px) {
-            .corner-image {
-                width: 80px; /* Tamaño reducido para dispositivos móviles */
-                height: 80px; /* Tamaño reducido para dispositivos móviles */
-            }
-        }
-        @keyframes mover-aleatorio {
-  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  25% { transform: translate(5px, 5px) rotate(0.5deg) scale(1.01); }
-  50% { transform: translate(-5px, -5px) rotate(-0.5deg) scale(0.99); }
-  75% { transform: translate(2px, 2px) rotate(0.25deg) scale(1.005); }
-  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    max-width: 50px;
+    height: auto;
+    margin: 4px 0;
+}
+
+.rounded-full {
+    border-radius: 50%;
+}
+
+.team-img-wrapper {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    padding: 2px;
+    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+}
+
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.header-bg {
+    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: auto;
+    padding: 10px 0;
+}
+
+.header-logo {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+
+.cta-section {
+    background: url('banner.webp') no-repeat center center;
+    background-size: cover;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 50px;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.cta-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    color: #ffffff;
+    margin: 8px 0;
+}
+
+.cta-text {
+    text-align: left;
+    max-width: 50%;
+}
+
+.cta-button {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    width: fit-content;
+    font-weight: bold;
+    text-transform: uppercase;
+    justify-content: center;
+}
+
+.cta-button img {
+    width: 24px;
+    height: 24px;
+    transition: fill 0.3s;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    background-color: #1e7e34;
+    color: #ffffff;
+}
+
+.cta-button:hover img,
+.cta-button:focus img {
+    fill: #ffffff;
+}
+
+.cta-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.services-card {
+    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.services-card img {
+    width: 90px;
+    height: 90px;
+    margin-right: auto;
+}
+
+.section-title {
+    font-size: 43px;
+}
+
+footer {
+    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+    padding: 20px 0;
+    text-align: center;
+    color: #ffffff;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+footer img {
+    width: 150px;
+    height: 150px;
+    vertical-align: middle;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .cta-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .cta-text {
+        margin-bottom: 20px;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .cta-image img {
+        max-width: 100%;
+    }
+
+    .cta-section {
+        min-height: auto;
+        height: auto;
+    }
+
+    .cta-button {
+        margin-right: auto;
+    }
+}
+
+/* Estilos generales */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 460px) {
+    .social-buttons {
+        margin-top: -10px;
+    }
+
+    .bg-color3 {
+        margin-top: 0;
+    }
+
+    .py-12 {
+        padding-top: 0px;
+    }
+
+    .corner-images {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: visible;
+    }
+}
+
+.bg-color3 {
+    margin-top: 0;
+}
+
+.py-12 {
+    padding-top: 20px;
+}
+
+.corner-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.corner-image {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+/* ANIMACION LOGO 1*/
+@keyframes mover-diagonal1 {  
+    0% { transform: translate(0, 0); opacity: 1; }  
+    100% { transform: translate(-10vw, -10vw); opacity: 0; }  
+}  
+
+.contenedor {  
+    position: relative;  
+    width: 100%;  
+    height: 100%;  
+}  
+
+.imagen-animada1 {  
+    position: absolute;  
+    top: 0;  /* Cambiado de bottom a top */  
+    left: 0; /* Cambiado de right a left */  
+    animation: mover-diagonal1 10s infinite;  
+    animation-timing-function: ease-in-out;  
+    width: 10vw;  
+    height: 10vw;  
+}  
+
+/* Estilos para dispositivos móviles */  
+@media (max-width: 489px) {  
+    .imagen-animada1 {  
+        width: 100px;  
+        height: 10px;  
+    }  
+}  
+
+/* Estilos para pantallas de monitores */  
+@media (min-width: 490px) {  
+    .imagen-animada1 {  
+        width: 200px;  
+        height: 200px;  
+    }  
+} 
+
+/* ANIMACION LOGO 2 */
+@keyframes mover-diagonal2 {  
+    0% { transform: translate(0, 0); opacity: 1; }  
+    100% { transform: translate(10vw, -10vw); opacity: 0; }  
+}  
+
+.contenedor {  
+    position: relative;  
+    width: 100%;  
+    height: 100%;  
+}  
+
+.imagen-animada2 {  
+    position: absolute;  
+    TOP: 0;  /* Mantener en la parte inferior */  
+    right: 0;    /* Mantener en la parte izquierda */  
+    animation: mover-diagonal2 10s infinite;  
+    animation-timing-function: ease-in-out;  
+    width: 10vw;  
+    height: 10vw;  
+}  
+
+/* Estilos para dispositivos móviles */  
+@media (max-width: 489px) {  
+    .imagen-animada2 {  
+        width: 100px;  
+        height: 100px; /* Cambiar a altura 100px para mantener proporciones */  
+    }  
+}  
+
+/* Estilos para pantallas de monitores */  
+@media (min-width: 490px) {  
+    .imagen-animada2 {  
+        width: 100px;  
+        height: 1000px;  
+    }  
+}  
+/* ANIMACION LOGO INSTAGRAM*/
+@keyframes mover-diagonal {
+        0% {transform: translate(0, 0); opacity: 1; }
+        100% { transform: translate(10vw, 10vw); opacity: 0; }
+    }
+
+    .contenedor {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .imagen-animada {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        animation: mover-diagonal 10s infinite;
+        animation-timing-function: ease-in-out;
+        width: 10vw;
+        height: 10vw;
+    }
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 489px) {
+    .imagen-animada {
+        width: 100px;
+        height: 10px;
+    }
+}
+
+/* Estilos para pantallas de monitores */
+@media (min-width: 490px) {
+    .imagen-animada {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+
+@keyframes mover-aleatorio {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    25% { transform: translate(5px, 5px) rotate(0.5deg) scale(1.01); }
+    50% { transform: translate(-5px, -5px) rotate(-0.5deg) scale(0.99); }
+    75% { transform: translate(2px, 2px) rotate(0.25deg) scale(1.005); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); }
 }
 
 .imagen-astronauta {
-  animation: mover-aleatorio 20s infinite;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    animation: mover-aleatorio 20s infinite;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 .imagen-astronauta {
-  animation: mover-aleatorio 5s infinite;
+    animation: mover-aleatorio 5s infinite;
 }
-/* Estilos para el componente flexible */
+
 .flexible-container {
     display: flex;
     flex-direction: row;
@@ -326,8 +465,16 @@
         width: 100%;
         margin-bottom: 10px;
     }
-}
 
+
+
+/* Estilos para pantallas de monitores */
+@media (min-width: 769px) {
+    .imagen-animada {
+        width: 10vw;
+        height: 10vw;
+    }
+}
     </style>
 </head>
 <body class="bg-color3 text-color1">
@@ -351,10 +498,10 @@
             <div class="cta-image" style="position: relative;">
                 <img src="tu-imagen.jpg" class="imagen-astronauta" alt="Astronauta">
                 <div class="corner-images">
-                    <img src="corner1.webp" class="corner-image" style="top: 40px; left: 0;">
-                    <img src="corner2.webp" class="corner-image" style="top: 0; right: 0;">
+                    <img src="corner4.webp" alt="Imagen Animada1" class="imagen-animada1">
+                    <img src="corner4.webp" alt="Imagen Animada1" class="imagen-animada2">
                     <img src="corner3.webp" class="corner-image" style="bottom: 0; left: 0;">
-                    <img src="corner4.webp" class="corner-image" style="bottom: 50px; right: -50px;">
+                    <img src="corner4.webp" alt="Imagen Animada" class="imagen-animada">
                 </div>
             </div>
         </div>

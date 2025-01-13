@@ -60,7 +60,9 @@
 }
 
 .header-bg {
-    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+    background: linear-gradient(270deg, #9604eb, #00bcfd, #9604eb);
+    background-size: 600% 600%;
+    animation: liquidGradient 15s ease infinite;
     width: 100vw;
     position: relative;
     left: 50%;
@@ -155,7 +157,9 @@
     align-items: center;
     gap: 10px;
     text-align: center;
+    
 }
+
 
 .services-card img {
     width: 90px;
@@ -163,9 +167,12 @@
     margin-right: auto;
 }
 
+
 .section-title {
-    font-size: 43px;
+    font-size: 48px;
+    
 }
+
 
 footer {
     background: linear-gradient(to bottom right, #9604eb, #00bcfd);
@@ -216,6 +223,7 @@ footer p {
         margin-right: auto;
     }
 }
+
 
 /* Estilos generales */
 .social-buttons {
@@ -271,7 +279,20 @@ footer p {
     height: 50px;
 }
 
-/* ANIMACION LOGO 1*/
+/* ANIMACION HEADER */
+@keyframes liquidGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ANIMACION LOGO 1*/ 
 @keyframes mover-diagonal1 {  
     0% { transform: translate(0, 0); opacity: 1; }  
     100% { transform: translate(-10vw, -10vw); opacity: 0; }  
@@ -404,15 +425,31 @@ footer p {
 
 .flexible-container {
     display: flex;
-    flex-direction: row;
-    background-color: #00bcfd;
+    flex-direction: column;
+    background-color: #9604eb;
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
-    justify-content: center;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+}
+
+.flexible-title {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.flexible-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .flexible-column {
@@ -424,11 +461,10 @@ footer p {
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
     overflow: hidden;
-    width: 100%;
-    background: #000;
 }
 
 .video-container iframe {
@@ -447,26 +483,46 @@ footer p {
     text-align: center;
     color: #9604eb;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
 }
 
 .flexible-card svg {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
+    width: 90px;
+    height: 90px;
+    margin-right: 20px;
+    flex-shrink: 0; /* Evita que el SVG se reduzca */
 }
 
-/* Media query para pantallas menores a 500px */
+.flexible-card-content {
+    text-align: left;
+}
+
+.flexible-card h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.flexible-card p {
+    font-size: 1rem;
+}
+
 @media (max-width: 1060px) {
-    .flexible-container {
+    .flexible-content {
         flex-direction: column;
     }
 
     .flexible-column {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
-
-
+/* texto footer*/
+.footer-text {
+    margin:1;
+    padding: 0;
+    line-height: 0.8; /* Ajusta la altura de línea según tus necesidades */
+}
 
 /* Estilos para pantallas de monitores */
 @media (min-width: 769px) {
@@ -475,6 +531,54 @@ footer p {
         height: 10vw;
     }
 }
+.services-card {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .services-card.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .services-card {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.services-card.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+  </style>
+</head>
+<body>
+  <!-- ANIMACION SCROLL PANTALLA -->
+
+<script>
+    function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function animateServiceCards() {
+        var cards = document.querySelectorAll('.services-card');
+        cards.forEach(function(card) {
+            if (isElementInViewport(card)) {
+                card.classList.add('animate');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', animateServiceCards);
+    window.addEventListener('load', animateServiceCards);
+</script>
     </style>
 </head>
 <body class="bg-color3 text-color1">
@@ -506,6 +610,7 @@ footer p {
             </div>
         </div>
     </section>
+    
 
     <!-- Botones redes -->
     <div class="social-buttons">
@@ -560,24 +665,33 @@ footer p {
         </div>
     </section>
 
-    <!-- Componente Flexible -->
     <section class="flexible-container">
-        <div class="flexible-column">
-            <h3 style="color: #9604eb;">Título del Video</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <h3 class="flexible-title">¿QUIENES SOMOS?</h3>
+        <div class="flexible-content">
+            <div class="flexible-column">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
             </div>
-        </div>
-        <div class="flexible-column">
-            <div class="flexible-card">
-                <svg><!-- SVG contenido --></svg>
-                <h2 style="color: #9604eb;">Título 1</h2>
-                <p style="color: #9604eb;">Subtítulo 1</p>
-            </div>
-            <div class="flexible-card">
-                <svg><!-- SVG contenido --></svg>
-                <h2 style="color: #9604eb;">Título 2</h2>
-                <p style="color: #9604eb;">Subtítulo 2</p>
+            <div class="flexible-column">
+                <div class="flexible-card">
+                    <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <image x="0" y="0" width="90" height="90" href="titulo1.svg" />
+                    </svg>
+                    <div class="flexible-card-content">
+                        <h3>MISIÓN</h3>
+                        <p>Mejorar la calidad de las empresas con soluciones innovadoras en diseño y gestión de redes y web</p>
+                    </div>
+                </div>
+                <div class="flexible-card">
+                    <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <image x="0" y="0" width="90" height="90" href="titulo2.svg" />
+                    </svg>
+                    <div class="flexible-card-content">
+                        <h3>VISIÓN</h3>
+                        <p>Ser líderes en transformar y optimizar procesos empresariales para el éxito de nuestros clientes.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -626,8 +740,8 @@ footer p {
     <!-- Footer -->
     <footer style="text-align: center;">
         <img src="logo.svg" alt="Logo" style="display: block; margin: 0 auto;">
-        <p><a href="mailto:siragon222@gmail.com">siragon222@gmail.com</a></p>
-        <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
+        <p class="footer-text">Diseñado y Programado por Ronald Niño</p>
+        <p class="footer-text">&copy; 2025 Todos los derechos reservados.</p>
     </footer>
 
     <script>

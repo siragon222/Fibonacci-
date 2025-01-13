@@ -508,7 +508,7 @@ footer p {
     font-size: 1rem;
 }
 
-@media (max-width: 1060px) {
+@media (max-width: 1200px) {
     .flexible-content {
         flex-direction: column;
     }
@@ -555,30 +555,28 @@ footer p {
 </head>
 <body>
   <!-- ANIMACION SCROLL PANTALLA -->
+  <style>
+    /* ... (mantén los estilos anteriores) ... */
 
-<script>
-    function isElementInViewport(el) {
-        var rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
+    .services-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    function animateServiceCards() {
-        var cards = document.querySelectorAll('.services-card');
-        cards.forEach(function(card) {
-            if (isElementInViewport(card)) {
-                card.classList.add('animate');
-            }
-        });
+    .services-card.animate {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    window.addEventListener('scroll', animateServiceCards);
-    window.addEventListener('load', animateServiceCards);
-</script>
+    /* Asegúrate de que la animación funcione en todos los dispositivos */
+    @media (min-width: 769px) {
+        .services-card {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+    }
+</style>
+
     </style>
 </head>
 <body class="bg-color3 text-color1">
@@ -745,16 +743,31 @@ footer p {
     </footer>
 
     <script>
-        const video = document.querySelector('iframe');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    video.src += "&autoplay=1";
-                } else {
-                    video.src = video.src.replace("&autoplay=1", "");
-                }
-            });
-        });
-        observer.observe(video);
-    </script>
+function isElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+function animateServiceCards() {
+    var cards = document.querySelectorAll('.services-card');
+    cards.forEach(function(card) {
+        if (isElementInViewport(card)) {
+            card.classList.add('animate');
+        }
+    });
+}
+
+// Ejecuta la animación en el scroll y también cuando se carga la página
+window.addEventListener('scroll', animateServiceCards);
+window.addEventListener('load', animateServiceCards);
+
+// Ejecuta la animación también cuando se redimensiona la ventana
+window.addEventListener('resize', animateServiceCards);
+</script>
+
 </body>

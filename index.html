@@ -169,8 +169,16 @@
 
 
 .section-title {
+    font-size: 37px;
+    line-height: 35px;
+
+}
+
+
+.section-title1 {
     font-size: 48px;
     line-height: 50px;
+  
     
 }
 
@@ -318,8 +326,10 @@ footer p {
 /* Estilos para dispositivos móviles */  
 @media (max-width: 489px) {  
     .imagen-animada1 {  
-        width: 100px;  
-        height: 10px;  
+        width: 150px;  
+        height: 150px;  
+        top: -5vw;  /* Cambiado de bottom a top */  
+        left: -5vw; /* Cambiado de right a left */  
     }  
 }  
 
@@ -356,8 +366,8 @@ footer p {
 /* Estilos para dispositivos móviles */  
 @media (max-width: 489px) {  
     .imagen-animada2 {  
-        width: 100px;  
-        height: 100px; /* Cambiar a altura 100px para mantener proporciones */  
+        width: 80px;  
+        height: 80px; /* Cambiar a altura 100px para mantener proporciones */  
     }  
 }  
 
@@ -365,11 +375,52 @@ footer p {
 @media (min-width: 490px) {  
     .imagen-animada2 {  
         width: 100px;  
-        height: 1000px;  
+        height: 100px;  
     }  
 }  
+/* ANIMACION LOGO WEB */
+@keyframes mover-diagonal3 {
+    0% { transform: translate(0, 0); opacity: 1; }
+    100% { transform: translate(-10vw, 5vw); opacity: 0; }
+}
+
+.contenedor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.imagen-animada3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: mover-diagonal3 10s infinite;
+    animation-timing-function: ease-in-out;
+    width: 10vw;
+    height: 10vw;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 489px) {
+    .imagen-animada3 {
+        width: 150px;
+        height: 150px;
+        bottom: -10vw;
+        left: -8vw;
+    }
+}
+
+/* Estilos para pantallas de monitores */
+@media (min-width: 490px) {
+    .imagen-animada3 {
+        width: 180px;
+        height: 180px;
+   
+    }
+}
 /* ANIMACION LOGO INSTAGRAM*/
-@keyframes mover-diagonal {
+@keyframes mover-diagonal4 {
         0% {transform: translate(0, 0); opacity: 1; }
         100% { transform: translate(10vw, 10vw); opacity: 0; }
     }
@@ -380,11 +431,11 @@ footer p {
         height: 100%;
     }
 
-    .imagen-animada {
+    .imagen-animada4 {
         position: absolute;
         bottom: 0;
         right: 0;
-        animation: mover-diagonal 10s infinite;
+        animation: mover-diagonal4 10s infinite;
         animation-timing-function: ease-in-out;
         width: 10vw;
         height: 10vw;
@@ -392,15 +443,17 @@ footer p {
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 489px) {
-    .imagen-animada {
+    .imagen-animada4 {
         width: 100px;
         height: 10px;
+        bottom: -10vw;
+        right: -10vw;
     }
 }
 
 /* Estilos para pantallas de monitores */
 @media (min-width: 490px) {
-    .imagen-animada {
+    .imagen-animada4 {
         width: 200px;
         height: 200px;
     }
@@ -596,7 +649,7 @@ footer p {
     <section class="cta-section">
         <div class="cta-content">
             <div class="cta-text">
-                <h1 class="text-3xl font-bold section-title mb-8 leading-tight">IMPULSA TU MARCA 🚀</h1>
+                <h1 class="text-3xl font-bold section-title1 mb-8 leading-tight">IMPULSA TU MARCA 🚀</h1>
                 <p>Impulsa tu negocio con nuestros servicios de marketing y publicidad. ¡Transforma tu marca, atrae más clientes y aumenta tus ventas hoy mismo!</p>
                 <a href="https://wa.me/16692045327" target="_blank" class="cta-button">
                     <img src="icon.svg" alt="Icono">
@@ -604,12 +657,12 @@ footer p {
                 </a>
             </div>
             <div class="cta-image" style="position: relative;">
-                <img src="tu-imagen.jpg" class="imagen-astronauta" alt="Astronauta">
+                <img src="tu-imagen.webp" class="imagen-astronauta" alt="Astronauta">
                 <div class="corner-images">
-                    <img src="corner4.webp" alt="Imagen Animada1" class="imagen-animada1">
-                    <img src="corner4.webp" alt="Imagen Animada1" class="imagen-animada2">
-                    <img src="corner3.webp" class="corner-image" style="bottom: 0; left: 0;">
-                    <img src="corner4.webp" alt="Imagen Animada" class="imagen-animada">
+                    <img src="corner1.webp" alt="Imagen Animada1" class="imagen-animada1">
+                    <img src="corner2.webp" alt="Imagen Animada2" class="imagen-animada2">
+                    <img src="corner3.webp" alt="Imagen Animada3" class="imagen-animada3">
+                    <img src="corner4.webp" alt="Imagen Animada4" class="imagen-animada4">
                 </div>
             </div>
         </div>
@@ -775,5 +828,7 @@ window.addEventListener('load', animateServiceCards);
 // Ejecuta la animación también cuando se redimensiona la ventana
 window.addEventListener('resize', animateServiceCards);
 </script>
+
+
 
 </body>

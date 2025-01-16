@@ -82,49 +82,68 @@
 .cta-section {
     background: url('banner.webp') no-repeat center center;
     background-size: cover;
-    min-height: 600px;
+    min-height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 50px 50px;
+    padding: 40px 40px;
     width: 100vw;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    
 }
 
 .cta-content {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
+    max-width: flex;
     color: #ffffff;
-    margin: 8px 0;
+    gap: 50px; /* Ajusta el valor según la separación deseada */
+    margin-left: 50px; /* Separación a la izquierda para pantallas grandes */
+    margin-top: 50px; /* Separación en la parte superior para pantallas grandes */
 }
 
+/* Media query para pantallas pequeñas */
+@media (max-width: 1000px) {
+    .cta-content {
+        margin-left: 0; /* Sin separación a la izquierda en pantallas pequeñas */
+        margin-top: 0; /* Sin separación en la parte superior en pantallas pequeñas */
+    }
+}
 .cta-text {
     text-align: left;
-    max-width: 50%;
+    max-width: 40%;
 }
 
 .cta-button {
     background-color: #28a745;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 12px 12px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 20px auto;
+    margin: 20px auto 20px 0; /* Alineado a la derecha */
     width: fit-content;
     font-weight: bold;
     text-transform: uppercase;
     justify-content: center;
+    flex-direction: row;
 }
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 1000px) {
+    .cta-button {
+        margin: 20px auto; /* Centrado en pantallas pequeñas */
+    }
+}
+
 
 .cta-button img {
     width: 24px;
@@ -181,6 +200,31 @@
   
     
 }
+.section-title2 {
+    font-size: 80px;
+    line-height: 75px;
+}
+
+@media (max-width: 1200px) {
+    .section-title2 {
+        font-size: 60px;
+        line-height: 55px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .section-title2 {
+        font-size: 60px;
+        line-height: 55px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .section-title2 {
+        font-size: 45px;
+        line-height: 45px;
+    }
+}
 
 
 footer {
@@ -206,7 +250,7 @@ footer p {
     margin: 10px 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .cta-content {
         flex-direction: column;
         text-align: center;
@@ -649,7 +693,7 @@ footer p {
     <section class="cta-section">
         <div class="cta-content">
             <div class="cta-text">
-                <h1 class="text-3xl font-bold section-title1 mb-8 leading-tight">IMPULSA TU MARCA 🚀</h1>
+                <h1 class="text-3xl font-bold section-title2 mb-8 leading-tight">IMPULSA TU MARCA 🚀</h1>
                 <p>Impulsa tu negocio con nuestros servicios de marketing y publicidad. ¡Transforma tu marca, atrae más clientes y aumenta tus ventas hoy mismo!</p>
                 <a href="https://wa.me/16692045327" target="_blank" class="cta-button">
                     <img src="icon.svg" alt="Icono">
@@ -804,6 +848,7 @@ footer p {
     </footer>
 
     <script>
+        
 function isElementInViewport(el) {
     var rect = el.getBoundingClientRect();
     return (
@@ -830,6 +875,37 @@ window.addEventListener('load', animateServiceCards);
 // Ejecuta la animación también cuando se redimensiona la ventana
 window.addEventListener('resize', animateServiceCards);
 </script>
+<script>
+        
+function isElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+function animateServiceCards() {
+    var cards = document.querySelectorAll('.services-card');
+    cards.forEach(function(card) {
+        if (isElementInViewport(card)) {
+            card.classList.add('animate');
+        }
+    });
+}
+
+// Ejecuta la animación en el scroll y también cuando se carga la página
+window.addEventListener('scroll', animateServiceCards);
+window.addEventListener('load', animateServiceCards);
+
+// Ejecuta la animación también cuando se redimensiona la ventana
+window.addEventListener('resize', animateServiceCards);
+
+
+</script>
+
 
 
 

@@ -24,13 +24,14 @@
 
 .card {
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(100, 11, 243, 0.329);
+    transition: box-shadow 0.5s ease;
+
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(5, 71, 214, 0.493);
 }
 
 .logo {
@@ -57,6 +58,8 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+
+
 }
 
 .header-bg {
@@ -104,7 +107,7 @@
     max-width: flex;
     color: #ffffff;
     gap: 50px; /* Ajusta el valor según la separación deseada */
-    margin-left: 50px; /* Separación a la izquierda para pantallas grandes */
+    margin-left: 85px; /* Separación a la izquierda para pantallas grandes */
     margin-top: 50px; /* Separación en la parte superior para pantallas grandes */
 }
 
@@ -188,9 +191,29 @@
 
 
 .section-title {
-    font-size: 37px;
-    line-height: 35px;
+    font-size: 60px;
+    line-height: 55px;
+}
 
+@media (max-width: 1200px) {
+    .section-title {
+        font-size: 70px;
+        line-height: 75px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .section-title {
+        font-size: 60px;
+        line-height: 65px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .section-title {
+        font-size: 45px;
+        line-height: 50px;
+    }
 }
 
 
@@ -202,27 +225,27 @@
 }
 .section-title2 {
     font-size: 80px;
-    line-height: 75px;
+    line-height: 95px;
 }
 
 @media (max-width: 1200px) {
     .section-title2 {
         font-size: 60px;
-        line-height: 55px;
+        line-height: 75px;
     }
 }
 
 @media (max-width: 1600px) {
     .section-title2 {
         font-size: 60px;
-        line-height: 55px;
+        line-height: 75px;
     }
 }
 
 @media (max-width: 1000px) {
     .section-title2 {
         font-size: 45px;
-        line-height: 45px;
+        line-height: 55px;
     }
 }
 
@@ -523,7 +546,7 @@ footer p {
 }
 
 .imagen-astronauta {
-    animation: mover-aleatorio 5s infinite;
+    animation: mover-aleatorio 8s infinite;
 }
 
 .flexible-container {

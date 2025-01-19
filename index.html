@@ -977,32 +977,38 @@ footer p {
         factElement.textContent = funFacts[randomIndex];
         factElement.style.opacity = 0;
         
-        // Efecto de fade in para la frase
         setTimeout(() => {
             factElement.style.transition = 'opacity 0.5s ease-in';
             factElement.style.opacity = 1;
         }, 100);
     }
 
-    // Función para manejar el preloader
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
+        const loadingText = document.querySelector('.loading-text');
         const body = document.body;
         
-        // Mostrar una frase aleatoria inmediatamente
         showRandomFact();
-        
-        // Cambiar la frase cada 3 segundos mientras se carga
         const factInterval = setInterval(showRandomFact, 3000);
         
         setTimeout(() => {
-            clearInterval(factInterval); // Detener el cambio de frases
-            preloader.classList.add('fade-out');
-            body.classList.remove('loading');
-            
+            // Cambiar el texto a "Bienvenido" con una animación suave
+            loadingText.style.opacity = '0';
             setTimeout(() => {
-                preloader.style.display = 'none';
+                loadingText.textContent = 'Bienvenido';
+                loadingText.style.opacity = '1';
             }, 500);
+
+            // Esperar un momento para mostrar "Bienvenido" antes de ocultar el preloader
+            setTimeout(() => {
+                clearInterval(factInterval);
+                preloader.classList.add('fade-out');
+                body.classList.remove('loading');
+                
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000); // Tiempo adicional para mostrar "Bienvenido"
         }, 1500);
     });
 

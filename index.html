@@ -98,36 +98,109 @@
     padding: 0 40px;
 }
 
+/* Contenedor con máscara de desvanecido */
+.scrolling-wrapper-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de desvanecido en los extremos */
+.scrolling-wrapper-container::before,
+.scrolling-wrapper-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px; /* Ancho del desvanecido */
+    z-index: 2;
+    pointer-events: none; /* Permite hacer clic a través del degradado */
+}
+
+.scrolling-wrapper-container::before {
+    left: 0;
+    background: linear-gradient(to right, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.scrolling-wrapper-container::after {
+    right: 0;
+    background: linear-gradient(to left, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+/* Resto de los estilos existentes */
 .scrolling-wrapper {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    padding: 20px;
-    gap: 20px;
+    padding: 20px 10%;     /* Padding horizontal para no pegar a los bordes */
+    gap: 15px;             /* Espacio entre items */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-}
-
-.scrolling-wrapper::-webkit-scrollbar {
-    display: none;
+    user-select: none;
+    cursor: grab;
 }
 
 .scroll-item {
     flex: 0 0 auto;
-    width: 300px;
-    min-width: 300px;
-    height: 200px;
+    width: 150px;         /* Reducido de 170px */
+    min-width: 150px;     /* Reducido de 170px */
+    height: 150px;        /* Mantenemos forma cuadrada */
     border-radius: 10px;
     overflow: hidden;
+    pointer-events: none;
+    margin: 10px 2px;     /* Reducido el margen horizontal de 5px a 2px */
+    transform-origin: center center;
+    will-change: transform;
 }
+
+/* Solo aplicar el efecto en móviles */
+@media (max-width: 767px) {
+    .scrolling-wrapper {
+        padding: 20px 2%;  /* Reducido de 5% a 2% */
+        gap: 2px;         /* Reducido de 5px a 2px */
+    }
+    
+    /* Añadir padding extra para compensar el zoom */
+    .scroll-item {
+        padding: 5px;     /* Reducido de 10px a 5px */
+    }
+}
+
+/* Deshabilitar el efecto en desktop */
+@media (min-width: 768px) {
+    .scroll-item {
+        transform: none !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .scroll-item {
+        width: 200px;      /* Ancho del item */
+        min-width: 200px;
+        height: 250px;     /* Alto del item */
+        margin: 10px 15px; /* Aumentado el margen horizontal a 15px */
+    }
+
+    .scrolling-wrapper {
+        padding: 20px 5%;  /* Padding del contenedor */
+        gap: 40px;        /* Aumentado el espacio entre items */
+    }
+}
+
 
 .scroll-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none; /* Mejora la experiencia de arrastre */
 }
 
 /* Estilos para los botones de navegación */
@@ -964,7 +1037,7 @@ footer p {
     <section class="projects-section py-12">
         <div class="container mx-auto">
             <h2 class="text-2xl font-light text-left mb-8 section-title leading-tight" style="color: #9604eb; text-align: left;">
-                NUESTROS<br><span class="font-extrabold">PROYECTOS</span>
+                NUESTROS<br><span class="font-extrabold">CLIENTES</span>
             </h2>
             <div class="relative">
                 <!-- Botón previo -->
@@ -972,10 +1045,12 @@ footer p {
                     <img src="arrow.svg" alt="Anterior">
                 </button>
                 
-                <div class="scrolling-wrapper">
-                    <div class="scroll-item">
-                        <img src="proyecto1.webp" alt="Proyecto 1">
-                    </div>
+                <!-- Nuevo contenedor para el efecto de desvanecido -->
+                <div class="scrolling-wrapper-container">
+                    <div class="scrolling-wrapper">
+                        <div class="scroll-item">
+                            <img src="proyecto1.webp" alt="Proyecto 1">
+                        </div>
                     <div class="scroll-item">
                         <img src="proyecto2.webp" alt="Proyecto 2">
                     </div>
@@ -1119,8 +1194,8 @@ footer p {
         
         // Mostrar la primera curiosidad inmediatamente
         showRandomFact();
-        // Cambiar curiosidades cada 3 segundos
-        const factInterval = setInterval(showRandomFact, 3000);
+        // Cambiar curiosidades cada 2 segundos (reducido de 3 a 2 segundos)
+        const factInterval = setInterval(showRandomFact, 2000);
         
         setTimeout(() => {
             // Cambiar el texto a "Bienvenido" con una animación suave
@@ -1144,51 +1219,134 @@ footer p {
     });
 </script>
 <script>
-    // Asegúrate de que este script esté al final del body
-    document.addEventListener('DOMContentLoaded', function() {
-        const scrollWrapper = document.querySelector('.scrolling-wrapper');
-        const prevButton = document.querySelector('.scroll-arrow.prev');
-        const nextButton = document.querySelector('.scroll-arrow.next');
-        
-        // Cantidad a desplazar (ancho de un item + gap)
-        const scrollAmount = 320; // 300px (ancho del item) + 20px (gap)
-        
-        // Función para actualizar visibilidad de los botones
-        function updateArrowsVisibility() {
-            const isAtStart = scrollWrapper.scrollLeft === 0;
-            const isAtEnd = scrollWrapper.scrollLeft >= (scrollWrapper.scrollWidth - scrollWrapper.clientWidth - 10);
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollWrapper = document.querySelector('.scrolling-wrapper');
+    const prevButton = document.querySelector('.scroll-arrow.prev');
+    const nextButton = document.querySelector('.scroll-arrow.next');
+    const items = document.querySelectorAll('.scroll-item');
+    
+    // Variables para el drag scrolling
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    // Cantidad a desplazar para los botones
+    const scrollAmount = 320;
+    
+    // Función para el efecto zoom en móviles
+    function updateZoom() {
+        if (window.innerWidth <= 767) { // Solo en móviles
+            const containerCenter = scrollWrapper.offsetWidth / 2;
+            const scrollCenter = scrollWrapper.scrollLeft + containerCenter;
             
-            prevButton.style.opacity = isAtStart ? '0' : '1';
-            prevButton.style.pointerEvents = isAtStart ? 'none' : 'auto';
-            
-            nextButton.style.opacity = isAtEnd ? '0' : '1';
-            nextButton.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+            items.forEach(item => {
+                const itemCenter = item.offsetLeft + (item.offsetWidth / 2);
+                const distance = Math.abs(scrollCenter - itemCenter);
+                const maxDistance = containerCenter;
+                
+                // Calcular el factor de escala (1 en el centro, 0.8 en los extremos)
+                const scale = Math.max(0.8, 1 - (distance / maxDistance) * 0.2);
+                
+                // Aplicar la transformación con una transición suave
+                item.style.transform = `scale(${scale})`;
+                item.style.transition = 'transform 0.3s ease';
+            });
         }
+    }
+    
+    // Función para actualizar visibilidad de los botones
+    function updateArrowsVisibility() {
+        const isAtStart = scrollWrapper.scrollLeft === 0;
+        const isAtEnd = scrollWrapper.scrollLeft >= (scrollWrapper.scrollWidth - scrollWrapper.clientWidth - 10);
         
-        // Manejadores de eventos para los botones
-        prevButton.addEventListener('click', () => {
-            scrollWrapper.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
+        prevButton.style.opacity = isAtStart ? '0' : '1';
+        prevButton.style.pointerEvents = isAtStart ? 'none' : 'auto';
+        
+        nextButton.style.opacity = isAtEnd ? '0' : '1';
+        nextButton.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+    }
+    
+    // Event listeners para los botones
+    prevButton.addEventListener('click', () => {
+        scrollWrapper.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
         });
-        
-        nextButton.addEventListener('click', () => {
-            scrollWrapper.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Actualizar visibilidad de flechas al hacer scroll
-        scrollWrapper.addEventListener('scroll', updateArrowsVisibility);
-        
-        // Actualizar visibilidad inicial
-        updateArrowsVisibility();
-        
-        // Actualizar al cambiar el tamaño de la ventana
-        window.addEventListener('resize', updateArrowsVisibility);
     });
+    
+    nextButton.addEventListener('click', () => {
+        scrollWrapper.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    // Event listeners para el drag scrolling
+    scrollWrapper.addEventListener('mousedown', (e) => {
+        isDown = true;
+        scrollWrapper.style.cursor = 'grabbing';
+        startX = e.pageX - scrollWrapper.offsetLeft;
+        scrollLeft = scrollWrapper.scrollLeft;
+    });
+
+    scrollWrapper.addEventListener('mouseleave', () => {
+        isDown = false;
+        scrollWrapper.style.cursor = 'grab';
+    });
+
+    scrollWrapper.addEventListener('mouseup', () => {
+        isDown = false;
+        scrollWrapper.style.cursor = 'grab';
+    });
+
+    scrollWrapper.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollWrapper.offsetLeft;
+        const walk = (x - startX) * 2; // Multiplicador de velocidad
+        scrollWrapper.scrollLeft = scrollLeft - walk;
+    });
+
+    // Event listener para la rueda del mouse
+    scrollWrapper.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scrollWrapper.scrollLeft += e.deltaY;
+        updateZoom(); // Actualizar zoom al usar la rueda
+    });
+    
+    // Event listeners para touch en móviles
+    scrollWrapper.addEventListener('touchmove', () => {
+        requestAnimationFrame(updateZoom);
+    });
+
+    scrollWrapper.addEventListener('touchend', () => {
+        requestAnimationFrame(updateZoom);
+    });
+    
+    // Event listener para el scroll
+    scrollWrapper.addEventListener('scroll', () => {
+        updateArrowsVisibility();
+        requestAnimationFrame(updateZoom);
+    });
+    
+    // Event listener para redimensionamiento de ventana
+    window.addEventListener('resize', () => {
+        updateArrowsVisibility();
+        updateZoom();
+    });
+    
+    // Inicialización
+    updateArrowsVisibility();
+    updateZoom();
+    scrollWrapper.style.cursor = 'grab';
+
+    // Prevenir el scroll vertical en móviles cuando se hace scroll horizontal
+    scrollWrapper.addEventListener('touchmove', (e) => {
+        if (Math.abs(e.touches[0].clientX - startX) > Math.abs(e.touches[0].clientY - startY)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+});
     </script>
 </body>
 </html>

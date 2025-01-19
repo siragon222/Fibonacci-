@@ -1192,10 +1192,8 @@ footer p {
         const loadingText = document.querySelector('.loading-text');
         const body = document.body;
         
-        // Mostrar la primera curiosidad inmediatamente
+        // Mostrar una única curiosidad aleatoria
         showRandomFact();
-        // Cambiar curiosidades cada 2 segundos (reducido de 3 a 2 segundos)
-        const factInterval = setInterval(showRandomFact, 2000);
         
         setTimeout(() => {
             // Cambiar el texto a "Bienvenido" con una animación suave
@@ -1207,7 +1205,6 @@ footer p {
 
             // Esperar un momento para mostrar "Bienvenido" antes de ocultar el preloader
             setTimeout(() => {
-                clearInterval(factInterval);
                 preloader.classList.add('fade-out');
                 body.classList.remove('loading');
                 

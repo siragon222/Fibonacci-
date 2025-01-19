@@ -90,6 +90,96 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+
+/* Estilos existentes del scroll */
+.projects-section {
+    width: 100%;
+    position: relative;
+    padding: 0 40px;
+}
+
+.scrolling-wrapper {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 20px;
+    gap: 20px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-item {
+    flex: 0 0 auto;
+    width: 300px;
+    min-width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.scroll-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilos para los botones de navegación */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(150, 4, 235, 0.8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.scroll-arrow:hover {
+    background: rgba(150, 4, 235, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow.prev {
+    left: 0;
+}
+
+.scroll-arrow.next {
+    right: 0;
+}
+
+.scroll-arrow img {
+    width: 20px;
+    height: 20px;
+}
+
+.scroll-arrow.prev img {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .projects-section {
+        padding: 0;
+    }
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(5, 71, 214, 0.3);
@@ -746,7 +836,7 @@ footer p {
         .services-card {
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
-    }
+}
 </style>
 
 </style>
@@ -787,7 +877,6 @@ footer p {
         </div>
     </section>
     
-
     <!-- Botones redes -->
     <div class="social-buttons">
         <svg width="500" height="100" viewBox="0 0 200 50" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
@@ -872,6 +961,45 @@ footer p {
         </div>
     </section>
 
+    <section class="projects-section py-12">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-light text-left mb-8 section-title leading-tight" style="color: #9604eb; text-align: left;">
+                NUESTROS<br><span class="font-extrabold">PROYECTOS</span>
+            </h2>
+            <div class="relative">
+                <!-- Botón previo -->
+                <button class="scroll-arrow prev">
+                    <img src="arrow.svg" alt="Anterior">
+                </button>
+                
+                <div class="scrolling-wrapper">
+                    <div class="scroll-item">
+                        <img src="proyecto1.webp" alt="Proyecto 1">
+                    </div>
+                    <div class="scroll-item">
+                        <img src="proyecto2.webp" alt="Proyecto 2">
+                    </div>
+                    <div class="scroll-item">
+                        <img src="proyecto3.webp" alt="Proyecto 3">
+                    </div>
+                    <div class="scroll-item">
+                        <img src="proyecto4.webp" alt="Proyecto 4">
+                    </div>
+                    <div class="scroll-item">
+                        <img src="proyecto5.webp" alt="Proyecto 5">
+                    </div>
+                    <div class="scroll-item">
+                        <img src="proyecto6.webp" alt="Proyecto 6">
+                    </div>
+                </div>
+                
+                <!-- Botón siguiente -->
+                <button class="scroll-arrow next">
+                    <img src="arrow.svg" alt="Siguiente">
+                </button>
+            </div>
+        </div>
+    </section>
     <!-- Equipo Creativo -->
     <section class="py-12">
         <div class="container mx-auto">
@@ -1015,5 +1143,52 @@ footer p {
         }, 1500);
     });
 </script>
+<script>
+    // Asegúrate de que este script esté al final del body
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollWrapper = document.querySelector('.scrolling-wrapper');
+        const prevButton = document.querySelector('.scroll-arrow.prev');
+        const nextButton = document.querySelector('.scroll-arrow.next');
+        
+        // Cantidad a desplazar (ancho de un item + gap)
+        const scrollAmount = 320; // 300px (ancho del item) + 20px (gap)
+        
+        // Función para actualizar visibilidad de los botones
+        function updateArrowsVisibility() {
+            const isAtStart = scrollWrapper.scrollLeft === 0;
+            const isAtEnd = scrollWrapper.scrollLeft >= (scrollWrapper.scrollWidth - scrollWrapper.clientWidth - 10);
+            
+            prevButton.style.opacity = isAtStart ? '0' : '1';
+            prevButton.style.pointerEvents = isAtStart ? 'none' : 'auto';
+            
+            nextButton.style.opacity = isAtEnd ? '0' : '1';
+            nextButton.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+        }
+        
+        // Manejadores de eventos para los botones
+        prevButton.addEventListener('click', () => {
+            scrollWrapper.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+        
+        nextButton.addEventListener('click', () => {
+            scrollWrapper.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Actualizar visibilidad de flechas al hacer scroll
+        scrollWrapper.addEventListener('scroll', updateArrowsVisibility);
+        
+        // Actualizar visibilidad inicial
+        updateArrowsVisibility();
+        
+        // Actualizar al cambiar el tamaño de la ventana
+        window.addEventListener('resize', updateArrowsVisibility);
+    });
+    </script>
 </body>
 </html>

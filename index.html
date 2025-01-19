@@ -3,36 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Studio Fibonacci - Servicios de marketing y publicidad digital">
     <title>Studio Fibonacci</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    
     <style>
+            /* Añadir al inicio de la sección de estilos */
+    #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+    }
+
+    #preloader.fade-out {
+        opacity: 0;
+    }
+
+    #preloader img {
+        width: 150px;
+        height: auto;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+    }
+
+    #preloader p {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    /* Para ocultar el scroll mientras carga */
+    body.loading {
+        overflow: hidden;
+    }
+        :root {
+            --primary-color: #9604eb;
+            --secondary-color: #00bcfd;
+            --gradient: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0 20px;
         }
-        .header-bg, .cta-section { 
-    margin: 0 -20px;
-    width: calc(100% + 40px);
+
+.header-bg, .cta-section, footer { 
+    width: 100vw;
     position: relative;
     left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .card {
-    border: 1px solid #e2e8f0;
     border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(100, 11, 243, 0.329);
-    transition: box-shadow 0.5s ease;
-
+    box-shadow: 0 4px 6px rgba(100, 11, 243, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px rgba(5, 71, 214, 0.493);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(5, 71, 214, 0.3);
 }
+
 
 .logo {
     max-width: 50px;
@@ -45,22 +97,21 @@
 }
 
 .team-img-wrapper {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: 0 auto;
-    padding: 2px;
-    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-}
-
-.team-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            padding: 2px;
+            background: var(--gradient);
+            margin: 0 auto;
+        }
 
 
-}
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
 .header-bg {
     background: linear-gradient(270deg, #9604eb, #00bcfd, #9604eb);
@@ -83,32 +134,22 @@
 }
 
 .cta-section {
-    background: url('banner.webp') no-repeat center center;
-    background-size: cover;
-    min-height: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 40px;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    
-}
+    background: url('banner.webp') center/cover no-repeat;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 40px;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
 
 .cta-content {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 100%;
-    max-width: flex;
+    gap: 50px;
+    margin-left: 85px;
+    margin-top: 50px;
     color: #ffffff;
-    gap: 50px; /* Ajusta el valor según la separación deseada */
-    margin-left: 85px; /* Separación a la izquierda para pantallas grandes */
-    margin-top: 50px; /* Separación en la parte superior para pantallas grandes */
+    
 }
 
 /* Media query para pantallas pequeñas */
@@ -118,26 +159,23 @@
         margin-top: 0; /* Sin separación en la parte superior en pantallas pequeñas */
     }
 }
+
 .cta-text {
-    text-align: left;
     max-width: 40%;
 }
 
 .cta-button {
     background-color: #28a745;
-    color: #ffffff;
-    padding: 12px 12px;
+    color: white;
+    padding: 12px;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 20px auto 20px 0; /* Alineado a la derecha */
-    width: fit-content;
+    transition: background-color 0.3s;
     font-weight: bold;
     text-transform: uppercase;
-    justify-content: center;
-    flex-direction: row;
+    width: fit-content;
 }
 
 /* Media query para pantallas pequeñas */
@@ -154,32 +192,44 @@
     transition: fill 0.3s;
 }
 
-.cta-button:hover,
-.cta-button:focus {
+.cta-button:hover {
     background-color: #1e7e34;
-    color: #ffffff;
 }
 
-.cta-button:hover img,
-.cta-button:focus img {
-    fill: #ffffff;
+
+.cta-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
 }
 
-.cta-image img {
-    max-width: 70%;
-    height: auto;
-}
 
 .services-card {
-    background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-    color: #ffffff;
+    background: var(--gradient);
+    color: white;
     padding: 20px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
-    text-align: center;
-    
+    opacity: 1; /* Cambiamos a 1 para que sean visibles por defecto */
+    transform: translateY(0); /* Reseteamos la posición inicial */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+}
+
+/* Definimos el estado inicial para la animación de entrada */
+.services-card.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Definimos el estado final cuando se agrega la clase animate */
+.services-card.animate {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
@@ -274,31 +324,21 @@ footer p {
 }
 
 @media (max-width: 1000px) {
-    .cta-content {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
+            .cta-content {
+                flex-direction: column;
+                text-align: center;
+                margin: 0;
+            }
 
-    .cta-text {
-        margin-bottom: 20px;
-        max-width: 100%;
-        text-align: center;
-    }
+            .cta-text {
+                max-width: 100%;
+            }
 
-    .cta-image img {
-        max-width: 100%;
-    }
-
-    .cta-section {
-        min-height: auto;
-        height: auto;
-    }
-
-    .cta-button {
-        margin-right: auto;
-    }
-}
+            .section-title {
+                font-size: 45px;
+                line-height: 50px;
+            }
+        }
 
 
 /* Estilos generales */
@@ -311,19 +351,16 @@ footer p {
 }
 
 /* Media query para dispositivos móviles */
+
 @media (max-width: 460px) {
     .social-buttons {
         margin-top: -10px;
     }
 
-    .bg-color3 {
-        margin-top: 0;
-    }
-
     .py-12 {
-        padding-top: 0px;
+        padding-top: 0;
     }
-
+}
     .corner-images {
         position: relative;
         width: 100%;
@@ -331,7 +368,6 @@ footer p {
         pointer-events: none;
         overflow: visible;
     }
-}
 
 .bg-color3 {
     margin-top: 0;
@@ -355,18 +391,11 @@ footer p {
     height: 50px;
 }
 
-/* ANIMACION HEADER */
 @keyframes liquidGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
+
 
 /* ANIMACION LOGO 1*/ 
 @keyframes mover-diagonal1 {  
@@ -405,8 +434,8 @@ footer p {
     .imagen-animada1 {  
         width: 200px;  
         height: 200px;  
-        top: -5vw;  /* Cambiado de bottom a top */  
-        left: -5vw; /* Cambiado de right a left */  
+        top: -3vw;  /* Cambiado de bottom a top */  
+        left: 10vw; /* Cambiado de right a left */  
     }  
 } 
 
@@ -488,7 +517,8 @@ footer p {
     .imagen-animada3 {
         width: 180px;
         height: 180px;
-   
+        bottom: 15PX;
+        left: 70PX;
     }
 }
 /* ANIMACION LOGO INSTAGRAM*/
@@ -546,7 +576,10 @@ footer p {
 }
 
 .imagen-astronauta {
-    animation: mover-aleatorio 8s infinite;
+    aniMation: mover-aleatorio 8s infinite;
+    max-height: 900px; /* Ajusta este valor según necesites */
+    width: auto;
+    margin: 0 auto;
 }
 
 .flexible-container {
@@ -682,9 +715,11 @@ footer p {
     opacity: 1;
     transform: translateY(0);
 }
-  </style>
-</head>
-<body>
+
+.services-card img {
+    width: 90px;
+    height: 90px;
+}
   <!-- ANIMACION SCROLL PANTALLA -->
   <style>
     /* ... (mantén los estilos anteriores) ... */
@@ -693,12 +728,7 @@ footer p {
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.5s ease, transform 0.5s ease;
-    }
 
-    .services-card.animate {
-        opacity: 1;
-        transform: translateY(0);
-    }
 
     /* Asegúrate de que la animación funcione en todos los dispositivos */
     @media (min-width: 769px) {
@@ -708,10 +738,14 @@ footer p {
     }
 </style>
 
-    </style>
+</style>
 </head>
-<body class="bg-color3 text-color1">
-
+<body class="bg-color3 text-color1 loading">
+    <!-- Añadir justo después del body -->
+    <div id="preloader">
+        <img src="logo1.svg" alt="Cargando...">
+        <p>Cargando...</p>
+    </div>
     <!-- Header -->
     <header class="header-bg">
         <img src="logo1.svg" alt="Logo" class="logo header-logo">
@@ -876,65 +910,65 @@ footer p {
     </footer>
 
     <script>
-        
-function isElementInViewport(el) {
-    var rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-function animateServiceCards() {
-    var cards = document.querySelectorAll('.services-card');
-    cards.forEach(function(card) {
-        if (isElementInViewport(card)) {
-            card.classList.add('animate');
-        }
-    });
-}
-
-// Ejecuta la animación en el scroll y también cuando se carga la página
-window.addEventListener('scroll', animateServiceCards);
-window.addEventListener('load', animateServiceCards);
-
-// Ejecuta la animación también cuando se redimensiona la ventana
-window.addEventListener('resize', animateServiceCards);
-</script>
-<script>
-        
-function isElementInViewport(el) {
-    var rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-function animateServiceCards() {
-    var cards = document.querySelectorAll('.services-card');
-    cards.forEach(function(card) {
-        if (isElementInViewport(card)) {
-            card.classList.add('animate');
-        }
-    });
-}
-
-// Ejecuta la animación en el scroll y también cuando se carga la página
-window.addEventListener('scroll', animateServiceCards);
-window.addEventListener('load', animateServiceCards);
-
-// Ejecuta la animación también cuando se redimensiona la ventana
-window.addEventListener('resize', animateServiceCards);
-
-
-</script>
-
-
-
-
+        // Inicializamos las cards como ocultas
+        document.querySelectorAll('.services-card').forEach(card => {
+            card.classList.add('hidden');
+        });
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('hidden');
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+    
+        document.querySelectorAll('.services-card').forEach(card => {
+            observer.observe(card);
+            
+            // Efecto zoom al hover
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+    
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+    
+            // Efecto al hacer clic
+            card.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+    
+            card.addEventListener('mouseup', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+        });
+    
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
+    </script>
+        <script>
+            // Función para manejar el preloader
+            window.addEventListener('load', function() {
+                const preloader = document.getElementById('preloader');
+                const body = document.body;
+                
+                // Esperar un mínimo de tiempo para mostrar el preloader (opcional)
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    body.classList.remove('loading');
+                    
+                    // Remover el preloader del DOM después de la animación
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1500); // Ajusta este tiempo según lo desees
+            });
+    
+            // ... resto del código JavaScript existente ...
+        </script>
 </body>
+</html>

@@ -10,45 +10,54 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     
     <style>
-            /* Añadir al inicio de la sección de estilos */
-    #preloader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom right, #9604eb, #00bcfd);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out;
-    }
-
-    #preloader.fade-out {
-        opacity: 0;
-    }
-
-    #preloader img {
-        width: 150px;
-        height: auto;
-        margin-bottom: 20px;
-        animation: pulse 2s infinite;
-    }
-
-    #preloader p {
-        color: white;
-        font-size: 1.2rem;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #9604eb, #00bcfd);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+            text-align: center;
+            padding: 20px;
+        }
+    
+        #preloader img {
+            width: 80px; /* Reducido de 150px a 80px */
+            height: auto;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+    
+        #preloader p {
+            color: white;
+            text-align: center;
+            margin: 5px 0;
+        }
+    
+        #preloader .loading-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    
+        #preloader .fun-fact {
+            font-size: 1rem;
+            max-width: 600px;
+            margin-top: 15px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+    
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
 
     /* Para ocultar el scroll mientras carga */
     body.loading {
@@ -740,11 +749,13 @@ footer p {
 
 </style>
 </head>
+</style>
+
 <body class="bg-color3 text-color1 loading">
-    <!-- Añadir justo después del body -->
     <div id="preloader">
         <img src="logo1.svg" alt="Cargando...">
-        <p>Cargando...</p>
+        <p class="loading-text">Cargando...</p>
+        <p class="fun-fact"></p>
     </div>
     <!-- Header -->
     <header class="header-bg">
@@ -950,25 +961,52 @@ footer p {
     
         document.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
     </script>
-        <script>
-            // Función para manejar el preloader
-            window.addEventListener('load', function() {
-                const preloader = document.getElementById('preloader');
-                const body = document.body;
-                
-                // Esperar un mínimo de tiempo para mostrar el preloader (opcional)
-                setTimeout(() => {
-                    preloader.classList.add('fade-out');
-                    body.classList.remove('loading');
-                    
-                    // Remover el preloader del DOM después de la animación
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }, 1500); // Ajusta este tiempo según lo desees
-            });
-    
-            // ... resto del código JavaScript existente ...
-        </script>
+<script>
+    // Función para mostrar frases aleatorias
+    const funFacts = [
+        "¿Sabías que? El marketing digital puede aumentar tus ventas hasta un 400% más que el marketing tradicional.",
+        "Curiosidad: El 93% de las decisiones de compra comienzan con una búsqueda en línea.",
+        "Dato interesante: Las empresas con un sitio web profesional son 13% más rentables que aquellas que no lo tienen.",
+        "¿Sabías que? El 75% de los usuarios juzgan la credibilidad de una empresa por su diseño web.",
+        "Dato curioso: Las marcas con presencia consistente en redes sociales aumentan sus ingresos en un 23% en promedio."
+    ];
+
+    function showRandomFact() {
+        const factElement = document.querySelector('.fun-fact');
+        const randomIndex = Math.floor(Math.random() * funFacts.length);
+        factElement.textContent = funFacts[randomIndex];
+        factElement.style.opacity = 0;
+        
+        // Efecto de fade in para la frase
+        setTimeout(() => {
+            factElement.style.transition = 'opacity 0.5s ease-in';
+            factElement.style.opacity = 1;
+        }, 100);
+    }
+
+    // Función para manejar el preloader
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Mostrar una frase aleatoria inmediatamente
+        showRandomFact();
+        
+        // Cambiar la frase cada 3 segundos mientras se carga
+        const factInterval = setInterval(showRandomFact, 3000);
+        
+        setTimeout(() => {
+            clearInterval(factInterval); // Detener el cambio de frases
+            preloader.classList.add('fade-out');
+            body.classList.remove('loading');
+            
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 1500);
+    });
+
+    // ... resto del código JavaScript existente ...
+</script>
 </body>
 </html>

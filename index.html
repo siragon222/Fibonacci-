@@ -151,6 +151,7 @@
             padding: 40px;
             margin-left: -50vw;
             margin-right: -50vw;
+            position: relative;
         }
 
 .cta-content {
@@ -963,7 +964,6 @@ footer p {
         document.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
     </script>
 <script>
-    // Función para mostrar frases aleatorias
     const funFacts = [
         "¿Sabías que? El marketing digital puede aumentar tus ventas hasta un 400% más que el marketing tradicional.",
         "Curiosidad: El 93% de las decisiones de compra comienzan con una búsqueda en línea.",
@@ -989,7 +989,9 @@ footer p {
         const loadingText = document.querySelector('.loading-text');
         const body = document.body;
         
+        // Mostrar la primera curiosidad inmediatamente
         showRandomFact();
+        // Cambiar curiosidades cada 3 segundos
         const factInterval = setInterval(showRandomFact, 3000);
         
         setTimeout(() => {
@@ -1009,11 +1011,9 @@ footer p {
                 setTimeout(() => {
                     preloader.style.display = 'none';
                 }, 500);
-            }, 1000); // Tiempo adicional para mostrar "Bienvenido"
+            }, 1000);
         }, 1500);
     });
-
-    // ... resto del código JavaScript existente ...
 </script>
 </body>
 </html>

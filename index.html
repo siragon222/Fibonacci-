@@ -73,7 +73,7 @@
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 0 20px;
+            padding: 0;
             overflow-x: hidden; /* Evita el scroll horizontal */
         }
 
@@ -1209,14 +1209,17 @@ footer p {
 
             // Esperar un momento para mostrar "Bienvenido" antes de ocultar el preloader
             setTimeout(() => {
-                preloader.classList.add('fade-out');
+                // Añadir estas líneas para una transición más suave
+                preloader.style.transition = 'opacity 0.5s ease-out';
+                preloader.style.opacity = '0';
                 body.classList.remove('loading');
                 
                 setTimeout(() => {
                     preloader.style.display = 'none';
+                    document.documentElement.scrollTop = 0; // Asegurar que la página comience desde arriba
                 }, 500);
             }, 1000);
-        }, 3000); // Aumentado a 3000ms para dar más tiempo de lectura
+        }, 3000);
     });
 </script>
 <script>
